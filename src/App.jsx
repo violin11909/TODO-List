@@ -13,6 +13,9 @@ function App() {
   }
 
   function handleAddTodos(newTodo) {
+    if (newTodo === '') {
+      return;
+    }
     const newTodoList = [...todos, newTodo];
     persistData(newTodoList);
     setTodos(newTodoList);
@@ -31,6 +34,16 @@ function App() {
     setTodoValue(valueToBeEdited);
     handleDeleteTodo(index);
   }
+
+  // function handleSwitchOrder(index, direction) {
+  //   if (index === 0) {
+
+  //   } else if () {
+
+  //   } else {
+
+  //   }
+  // }
 
   useEffect(() => {
     if (!localStorage) {
