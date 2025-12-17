@@ -35,15 +35,18 @@ function App() {
     handleDeleteTodo(index);
   }
 
-  // function handleSwitchOrder(index, direction) {
-  //   if (index === 0) {
+  function handleSwitchOrder(index, direction) {
+    if ((direction === 'up' && index === 0) ||
+        (direction == 'down' && index === todos.length - 1)) {
+      return;
+    }
 
-  //   } else if () {
-
-  //   } else {
-
-  //   }
-  // }
+    const newIndex = direction === 'up' ? index - 1 : index + 1;
+    const newTodoList = [...todos];
+    [newTodoList[index], newTodoList[newIndex]] = [newTodoList[newIndex], newTodoList[index]];
+    persistData(newTodoList);
+    setTodos(newTodoList);
+  }
 
   useEffect(() => {
     if (!localStorage) {
@@ -60,8 +63,15 @@ function App() {
 
   return (
     <main>
-      <TodoInput todoValue={todoValue} setTodoValue={setTodoValue} handleAddTodos={handleAddTodos}/>
-      <TodoList handleDeleteTodo={handleDeleteTodo} handleEditTodo={handleEditTodo} todos={todos}/>
+      <TodoInput 
+        todoValue={todoValue} 
+        setTodoValue={setTodoValue} 
+        handleAddTodos={handleAddTodos}/>
+      <TodoList 
+        handleDeleteTodo={handleDeleteTodo} 
+        handleEditTodo={handleEditTodo} 
+        handleSwitchOrder={handleSwitchOrder}
+        todos={todos}/>
     </main>
   )
 }

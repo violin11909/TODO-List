@@ -1,18 +1,26 @@
 import React from 'react'
 
 export default function TodoCard(props) {
-  const {children, handleDeleteTodo, index, handleEditTodo} = props;
+  const {children, handleDeleteTodo, index, handleEditTodo, handleSwitchOrder} = props;
   
   return (
     <li className="todoItem">
       {children}
       <div className="actionsContainer">
         <button>
-          <i class="fa-solid fa-arrow-up"></i>
+          <i 
+            onClick={() => {
+              handleSwitchOrder(index, 'up')
+            }}
+            class="fa-solid fa-arrow-up"></i>
         </button>
 
         <button>
-          <i class="fa-solid fa-arrow-down"></i>
+          <i 
+            onClick={() => {
+              handleSwitchOrder(index, 'down')
+            }}
+            class="fa-solid fa-arrow-down"></i>
         </button>
 
         <button onClick={() => {
